@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class FreeCamera : MonoBehaviour
 {
     public float moveSpeed = 15f;
@@ -7,7 +6,6 @@ public class FreeCamera : MonoBehaviour
     public float rotateSpeed = 100f;
     public float zoomSpeed = 50f;
     public float minY = 8f, maxY = 60f;
-
     void Update()
     {
         float mult = Input.GetKey(KeyCode.LeftShift) ? fastMult : 1f;
@@ -16,10 +14,8 @@ public class FreeCamera : MonoBehaviour
         if (Input.GetKey(KeyCode.S)) dir -= transform.forward;
         if (Input.GetKey(KeyCode.A)) dir -= transform.right;
         if (Input.GetKey(KeyCode.D)) dir += transform.right;
-
-        dir.y = 0; // p³asko
+        dir.y = 0; 
         transform.position += dir.normalized * moveSpeed * mult * Time.deltaTime;
-
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (Mathf.Abs(scroll) > 0.0001f)
         {
@@ -28,8 +24,7 @@ public class FreeCamera : MonoBehaviour
             p.y = Mathf.Clamp(p.y, minY, maxY);
             transform.position = p;
         }
-
-        if (Input.GetMouseButton(2)) // œrodkowy przycisk
+        if (Input.GetMouseButton(2)) 
         {
             float yaw = Input.GetAxis("Mouse X") * rotateSpeed * Time.deltaTime;
             transform.Rotate(Vector3.up, yaw, Space.World);
