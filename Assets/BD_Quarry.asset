@@ -23,3 +23,5 @@ MonoBehaviour:
   incomePerMinute:
   - type: 1
     amount: 30
+  - type: 3
+    amount: 20
