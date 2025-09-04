@@ -26,7 +26,7 @@ public class BuildingPlacementController : MonoBehaviour
         if (!RayToGround(out var pos)) return;
         var snap = GridSystem.Snap(pos);
         _ghost.transform.position = snap;
-        bool can = CanPlace(snap, _selected);
+        bool can = CanPlace(snap, _selected) && InsideBoundsForBuilding(snap, _selected);
         var pg = _ghost.GetComponent<PlacementGhost>();
         if (pg) pg.SetValid(can);
         if (can && Input.GetMouseButtonDown(0))
@@ -47,6 +47,12 @@ public class BuildingPlacementController : MonoBehaviour
             _selected = null;
             if (_ghost) Destroy(_ghost);
         }
+    }
+    bool InsideBoundsForBuilding(Vector3 center, BuildingData bd)
+    {
+        if (MapBounds.Instance == null) return true;
+        Vector2 size = new Vector2(bd.footprint.x, bd.footprint.y) * GridSystem.cellSize;
+        return MapBounds.Instance.ContainsRectXZ(center, size);
     }
     bool RayToGround(out Vector3 hitPos)
     {

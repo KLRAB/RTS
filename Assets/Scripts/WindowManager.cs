@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 public class WindowManager : MonoBehaviour {
     [field: SerializeField] private GameObject menuState;
     [field: SerializeField] private GameObject settingsState;
@@ -17,6 +18,7 @@ public class WindowManager : MonoBehaviour {
     [field: SerializeField] private GameObject gameSettingsState;
     [field: SerializeField] private GameObject characterState;
     [field: SerializeField] private GameObject freeState;
+    [field: SerializeField] private string gameplaySceneName = "Main"; 
     public void OnBookClicked() {
         menuState.SetActive( false );
         bookState.SetActive( true   );
@@ -96,6 +98,11 @@ public class WindowManager : MonoBehaviour {
         settingsState.SetActive( false );
         audioSettingsState.SetActive( true );
     }
+    public void StartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(gameplaySceneName, LoadSceneMode.Single);
+    }
     public void OnExitClicked() {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
@@ -103,6 +110,4 @@ public class WindowManager : MonoBehaviour {
 
         Application.Quit();
     }
-
-
 }

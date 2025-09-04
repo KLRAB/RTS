@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: a0dbd99a7c92ea74ab2057f8320854cb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10f52fba744b8ff41b6be5557ab79e6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 15
+  radius: 30
   refreshInterval: 0.33
 --- !u!114 &9021588605473949786
 MonoBehaviour:
@@ -142,8 +142,7 @@ MonoBehaviour:
   attackRate: 1
   attackRange: 1.6
   moveSpeed: 3.5
-  rotateSpeedDegPerSec: 720
-  stoppingDistanceFactor: 0.6
+  health: {fileID: 0}
 --- !u!195 &2028118681740928131
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -14,8 +14,9 @@ public class FreeCamera : MonoBehaviour
         if (Input.GetKey(KeyCode.S)) dir -= transform.forward;
         if (Input.GetKey(KeyCode.A)) dir -= transform.right;
         if (Input.GetKey(KeyCode.D)) dir += transform.right;
-        dir.y = 0; 
+        dir.y = 0;
         transform.position += dir.normalized * moveSpeed * mult * Time.deltaTime;
+        ClampToBounds();
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (Mathf.Abs(scroll) > 0.0001f)
         {
@@ -23,11 +24,18 @@ public class FreeCamera : MonoBehaviour
             p += transform.forward * (scroll * zoomSpeed);
             p.y = Mathf.Clamp(p.y, minY, maxY);
             transform.position = p;
+            ClampToBounds();
         }
-        if (Input.GetMouseButton(2)) 
+        if (Input.GetMouseButton(2))
         {
             float yaw = Input.GetAxis("Mouse X") * rotateSpeed * Time.deltaTime;
             transform.Rotate(Vector3.up, yaw, Space.World);
         }
+    }
+    void LateUpdate() { ClampToBounds(); }
+    void ClampToBounds()
+    {
+        if (MapBounds.Instance == null) return;
+        transform.position = MapBounds.Instance.ClampXZ(transform.position);
     }
 }
